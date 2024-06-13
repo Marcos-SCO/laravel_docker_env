@@ -1,0 +1,47 @@
+# Use the official PHP image with Apache
+FROM php:8.2-apache
+
+# Install system dependencies and Composer
+RUN apt-get update && apt-get install -y \
+    git \
+    zip \
+    unzip \
+    nano \
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    libonig-dev \
+    libxml2-dev \
+    libzip-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd zip \
+    && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Copy existing application directory contents
+COPY . /var/www/html
+
+# Change ownership of the app directory and enable Apache rewrite module
+RUN chown -R www-data:www-data /var/www/html \
+    && a2enmod rewrite
+
+# Copy PHP configuration
+# COPY php.ini /usr/local/etc/php/
+COPY ./docker/php.ini /usr/local/etc/php/
+
+# Copy custom Apache configuration
+# COPY apache.conf /etc/apache2/sites-available/000-default.conf
+COPY ./docker/apache.conf /etc/apache2/sites-available/000-default.conf
+
+# Enable the custom Apache configuration
+RUN a2ensite 000-default.conf
+
+# Expose port 80
+EXPOSE 80
+
+# Start Apache in the foreground
+CMD ["apache2-foreground"]
