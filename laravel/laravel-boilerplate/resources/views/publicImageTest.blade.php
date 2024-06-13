@@ -1,0 +1,1 @@
+<img src="{{ asset('/img/laravel-logo-image.png') }}" alt="description of myimage" width="250px" height="auto">
