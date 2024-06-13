@@ -1,23 +1,53 @@
-# laravel_docker_env
-Boilerplate for Laravel 11 Framework
+# 📦 Laravel Docker Environment
 
-# How to run
+- Boilerplate for Laravel 11 Framework
 
-## Build containers
-- docker-compose up --build
+## 🚀 Getting Started
 
-## Access the web container service and execute the commands inside
- - docker-compose exec web bash
- - composer install && composer dump-autoload -o
- - php artisan key:generate
+### Navigate to the Project Directory:
+```bash
+cd /laravel-boilerplate
+```
 
-# General docker commands
+### Set laravel .env:
+```bash
+cp .env.example .env
+```
 
-## Remove containers
-- docker rm $(docker ps -qa)
+### Build Dcoker containers
+```bash
+docker-compose up --build
+```
 
-## Remove volumes
-- docker-compose down -v
+### Eter web container with bash
+```bash
+docker-compose exec web bash
+```
 
-## Build container
-- docker-compose up --build
+### Install composer dependencies for laravel
+```bash
+composer install
+
+composer dump-autoload -o
+```
+### Generate a laravel key
+```bash
+php artisan key:generate"
+```
+
+## ⚙️ General Docker Commands
+
+### Remove Containers:
+```bash
+docker rm $(docker ps -qa)
+```
+
+### Remove volumes:
+```bash
+docker-compose down -v
+```
+
+### Build containers:
+```bash
+docker-compose up --build
+```
