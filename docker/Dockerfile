@@ -19,6 +19,16 @@ RUN apt-get update && apt-get install -y \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
+# Node installation inside Laravel container: Install NVM (Node Version Manager)
+# SHELL ["/bin/bash", "-c"]
+# RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash \
+#     && export NVM_DIR="$HOME/.nvm" \
+#     && [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" \
+#     && [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" \
+#     && nvm install 20.14.0 \
+#     && nvm use 20.14.0 \
+#     && npm install -g npm@latest 
+
 # Set working directory
 WORKDIR /var/www/html
 
