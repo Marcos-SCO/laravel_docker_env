@@ -14,12 +14,12 @@ cd /laravel-boilerplate
 cp .env.example .env
 ```
 
-### Build Dcoker containers
+### Build Docoker containers
 ```bash
 docker-compose up --build
 ```
 
-### Eter web container with bash
+### Enter web container with bash
 ```bash
 docker-compose exec web bash
 ```
@@ -34,6 +34,13 @@ composer dump-autoload -o
 ```bash
 php artisan key:generate"
 ```
+
+### Run Vue app:
+```bash
+docker-compose exec web bash
+npm run dev
+```
+
 
 ## ⚙️ General Docker Commands
 
@@ -50,4 +57,10 @@ docker-compose down -v
 ### Build containers:
 ```bash
 docker-compose up --build
+```
+
+```bash
+### Stop and remove containers
+docker-compose down
+docker rm $(docker ps -a -q)
 ```

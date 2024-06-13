@@ -50,5 +50,20 @@ services:
     depends_on:
       - web
 
+  vue:
+    build:
+      context: .
+      dockerfile: docker/DockerfileVue
+    container_name: vue_app
+    environment:
+      PORT: 5002
+    ports:
+      - "5002:5002"
+    volumes:
+      - ./vue/vue-boilerplate:/vue-boilerplate
+    entrypoint: ["sh", "-c", "while :; do sleep 2073600; done"]
+    depends_on:
+      - web
+
 volumes:
   mysql_data:

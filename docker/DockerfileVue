@@ -1,0 +1,29 @@
+# Use the official Node.js image with LTS (Long Term Support) version
+FROM node:20.14.0
+
+# Set the working directory in the container
+WORKDIR ./vue-boilerplate
+
+# Copy package.json and package-lock.json (if available) to the working directory
+# COPY package*.json ./
+COPY ./vue/vue-boilerplate/package*.json .
+
+# Remove previous node_modules
+RUN rm -rf node_modules
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code to the working directory
+# COPY . .
+COPY ./vue/vue-boilerplate .
+
+# Build your Vue.js application for production with minification (uncomment if needed)
+RUN npm run build
+
+# Expose the port on which your Vue.js application will run (default for Vue CLI is 5173)
+EXPOSE 5002
+
+# Command to run your Vue.js application
+# CMD ["npm", "run", "dev"]
+# CMD ["npm", "run", "dev", "--", "--host"]
